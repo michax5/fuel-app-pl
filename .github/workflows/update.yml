@@ -3,7 +3,7 @@ name: Update Data Daily
 
 on:
   schedule:
-    - cron: "0 6 * * *"  # codziennie o ~8:00 PL
+    - cron: "0 6 * * *"
   workflow_dispatch:
 
 jobs:
@@ -19,21 +19,20 @@ jobs:
         with:
           python-version: "3.10"
 
-      - name: Install libraries
+      - name: Install dependencies
         run: |
           pip install pandas yfinance requests
 
       - name: Run pipeline
         run: python pipeline.py
 
-      - name: Commit new data
+      - name: Commit updated data
         run: |
           git config user.name "github-actions"
           git config user.email "actions@github.com"
 
-          git add data.csv
+          git add dane.csv
 
-          git commit -m "Update data.csv" || echo "No changes"
+          git commit -m "Update data" || echo "No changes"
 
           git push
-``
