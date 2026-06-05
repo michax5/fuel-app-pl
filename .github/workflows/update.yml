@@ -1,13 +1,36 @@
 
-name: Test Workflow
+name: Update Data Daily
 
 on:
+  schedule:
+    - cron: "0 12 * * *"
   workflow_dispatch:
 
 jobs:
-  test:
+  update-data:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Test step
-        run: echo "✅ WORKFLOW DZIAŁA"
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install dependencies
+        run: |
+          pip install pandas yfinance requests
+
+      - name: Run pipeline
+        run: python pipeline.py
+
+      - name: Commit updated data
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+
+          git add data.csv
+          git commit -m "Update data" || echo "No changes"
+          git push
