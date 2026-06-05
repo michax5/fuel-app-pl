@@ -1,4 +1,4 @@
-print("NOWA WERSJA PIPELINE 🔥🔥🔥")
+print("NOWA WERSJA PIPELINE 🔥🔥🔥 V2")
 import pandas as pd
 import yfinance as yf
 import requests
