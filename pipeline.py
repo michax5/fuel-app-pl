@@ -3,21 +3,19 @@ import pandas as pd
 import yfinance as yf
 import requests
 
+
 # ========= ROPA =========
 
+oil = yf.Ticker("BZ=F").history(period="3mo")
 
-oil = yf.download("BZ=F", period="3mo")
-
-# 🔥 NAJWAŻNIEJSZY FIX
-oil.columns = oil.columns.get_level_values(0)
-
-# reset index
 df_oil = oil.reset_index()
 
-# teraz działa normalnie
-df_oil["price_brent"] = df_oil["Close"]
+df_oil = df_oil.rename(columns={
+    "Date": "date",
+    "Close": "price_brent"
+})
 
-df_oil["date"] = pd.to_datetime(df_oil["Date"])
+df_oil["date"] = pd.to_datetime(df_oil["date"])
 
 df_oil = df_oil[["date", "price_brent"]]
 
