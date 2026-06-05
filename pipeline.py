@@ -10,17 +10,12 @@ oil = yf.Ticker("BZ=F").history(period="3mo")
 
 df_oil = oil.reset_index()
 
-# 💥 WYMUSZENIE NORMALNYCH KOLUMN
-df_oil.columns = [str(col) for col in df_oil.columns]
-
-# wybór kolumn po nazwie string
-df_oil = df_oil.rename(columns={
-    "Date": "date",
-    "Close": "price_brent"
+# 🔥 wybieramy KONKRETNE kolumny po nazwie string
+df_oil = pd.DataFrame({
+    "date": pd.to_datetime(df_oil.iloc[:, 0]),
+    "price_brent": df_oil.iloc[:, 4].astype(float)
 })
 
-df_oil = df_oil[["date", "price_brent"]]
-df_oil["date"] = pd.to_datetime(df_oil["date"])
 
 
 
