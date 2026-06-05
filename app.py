@@ -77,6 +77,16 @@ st.pyplot(fig)
 
 
 # =========================
+# ✅ Korelacja
+# =========================
+st.subheader("📈 Korelacja")
+
+for lag in range(0, 10):
+    corr = df_final["pb95"].corr(df_final["oil_pln"].shift(lag))
+    print(f"Lag {lag}: {corr}")
+
+
+# =========================
 # ✅ TABELA
 # =========================
 st.subheader("📋 Dane")
