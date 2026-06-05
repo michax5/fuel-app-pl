@@ -146,4 +146,3 @@ df["oil_pln_lag3"] = df["oil_pln"].shift(3)
 df.to_csv("data.csv", index=False)
 
 print("✅ data.csv updated with pb95 + oil")
-``
