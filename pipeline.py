@@ -1,4 +1,4 @@
-print("NOWA WERSJA PIPELINE 🔥🔥🔥 V2")
+print("NOWA WERSJA PIPELINE 🔥🔥🔥 V3")
 import pandas as pd
 import yfinance as yf
 import requests
@@ -30,11 +30,12 @@ df_fx = pd.DataFrame([
 ])
 df_fx["date"] = pd.to_datetime(df_fx["date"])
 
-#test
 
 
-print("df_oil columns:", df_oil.columns)
-print(type(df_oil.columns))
+# 🔥 FIX timezone
+df_oil["date"] = pd.to_datetime(df_oil["date"]).dt.tz_localize(None)
+df_fx["date"] = pd.to_datetime(df_fx["date"]).dt.tz_localize(None)
+
 
 
 
