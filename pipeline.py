@@ -6,18 +6,20 @@ import requests
 
 # ========= ROPA =========
 
+
 oil = yf.Ticker("BZ=F").history(period="3mo")
 
+# reset indeksu
 df_oil = oil.reset_index()
 
-df_oil = df_oil.rename(columns={
-    "Date": "date",
-    "Close": "price_brent"
-})
+# 🔥 KLUCZOWY FIX — wybieramy kolumny po indeksie
+df_oil = df_oil.iloc[:, [0, 4]]  # Date + Close
 
+df_oil.columns = ["date", "price_brent"]
+
+# upewniamy się że date jest datetime
 df_oil["date"] = pd.to_datetime(df_oil["date"])
 
-df_oil = df_oil[["date", "price_brent"]]
 
 
 
