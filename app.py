@@ -79,11 +79,13 @@ st.pyplot(fig)
 # =========================
 # ✅ Korelacja
 # =========================
-st.subheader("📈 Korelacja")
+
+st.subheader("📈 Korelacja (lag)")
 
 for lag in range(0, 10):
     corr = df_final["pb95"].corr(df_final["oil_pln"].shift(lag))
-    print(f"Lag {lag}: {corr}")
+    st.write(f"Lag {lag}: {corr:.3f}")
+
 
 
 # =========================
