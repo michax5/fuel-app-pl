@@ -5,11 +5,21 @@ import requests
 
 # ========= ROPA =========
 
+
 oil = yf.download("BZ=F", period="3mo")
+
+# 🔥 reset index
 df_oil = oil.reset_index()
-df_oil["price_brent"] = oil["Close"].values
+
+# 🔥 bierzemy wartości (unikamy MultiIndex)
+df_oil["price_brent"] = oil["Close"].to_numpy()
+
+# data
 df_oil["date"] = pd.to_datetime(df_oil["Date"])
+
+# finalny dataframe
 df_oil = df_oil[["date", "price_brent"]]
+
 
 # ========= USD =========
 url = "http://api.nbp.pl/api/exchangerates/rates/A/USD/last/60/?format=json"
