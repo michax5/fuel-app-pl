@@ -20,6 +20,7 @@ df_oil["date"] = pd.to_datetime(df_oil["date"])
 df_oil = df_oil[["date", "price_brent"]]
 
 
+
 # ========= USD =========
 url = "http://api.nbp.pl/api/exchangerates/rates/A/USD/last/60/?format=json"
 res = requests.get(url)
@@ -44,3 +45,5 @@ df["oil_pln"] = df["price_brent"] * df["usd_pln"]
 df.to_csv("data.csv", index=False)
 
 print("✅ data.csv updated!")
+print("df_oil columns:", df_oil.columns)
+print("df_fx columns:", df_fx.columns)
