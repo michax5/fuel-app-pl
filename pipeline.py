@@ -1,4 +1,4 @@
-
+print("NOWA WERSJA PIPELINE 🔥🔥🔥")
 import pandas as pd
 import yfinance as yf
 import requests
