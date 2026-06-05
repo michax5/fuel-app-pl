@@ -35,6 +35,18 @@ else:
 # ✅ UI
 # =========================
 st.title("⛽ Analiza rynku paliw")
+st.write("
+
+Aplikacja analizuje wpływ cen ropy na ceny paliw w Polsce,
+w tym na maksymalne ceny paliw ustalane przez państwo w drodze obwieszczeń.
+
+Łączy dane o cenach ropy oraz kursie USD/PLN,
+aby oszacować koszt surowca w złotówkach i jego wpływ na ceny paliw.
+
+Model identyfikuje opóźnienie zmian cen (lag)
+oraz ich wpływ na administracyjnie ustalane maksymalne ceny paliw.
+
+")
 
 # ---- SYGNAŁ ----
 st.markdown("## 📊 Sygnał na dziś")
