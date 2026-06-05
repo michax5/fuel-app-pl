@@ -6,20 +6,21 @@ import requests
 
 # ========= ROPA =========
 
-
 oil = yf.Ticker("BZ=F").history(period="3mo")
 
-# reset indeksu
 df_oil = oil.reset_index()
 
-# 🔥 KLUCZOWY FIX — wybieramy kolumny po indeksie
-df_oil = df_oil.iloc[:, [0, 4]]  # Date + Close
+# 💥 WYMUSZENIE NORMALNYCH KOLUMN
+df_oil.columns = [str(col) for col in df_oil.columns]
 
-df_oil.columns = ["date", "price_brent"]
+# wybór kolumn po nazwie string
+df_oil = df_oil.rename(columns={
+    "Date": "date",
+    "Close": "price_brent"
+})
 
-# upewniamy się że date jest datetime
+df_oil = df_oil[["date", "price_brent"]]
 df_oil["date"] = pd.to_datetime(df_oil["date"])
-
 
 
 
@@ -33,6 +34,14 @@ df_fx = pd.DataFrame([
     for item in data["rates"]
 ])
 df_fx["date"] = pd.to_datetime(df_fx["date"])
+
+#test
+
+
+print("df_oil columns:", df_oil.columns)
+print(type(df_oil.columns))
+
+
 
 # ========= MERGE =========
 df = pd.merge(df_oil[["date", "price_brent"]], df_fx, on="date", how="left")
