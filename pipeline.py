@@ -6,10 +6,10 @@ import requests
 # ========= ROPA =========
 
 oil = yf.download("BZ=F", period="3mo")
-oil.columns = oil.columns.get_level_values(0)
-df_oil = oil[["Close"]].rename(columns={"Close": "price_brent"})
-df_oil = df_oil.reset_index()
+df_oil = oil.reset_index()
+df_oil["price_brent"] = oil["Close"].values
 df_oil["date"] = pd.to_datetime(df_oil["Date"])
+df_oil = df_oil[["date", "price_brent"]]
 
 # ========= USD =========
 url = "http://api.nbp.pl/api/exchangerates/rates/A/USD/last/60/?format=json"
