@@ -8,16 +8,17 @@ import requests
 
 oil = yf.download("BZ=F", period="3mo")
 
-# 🔥 reset index
+# 🔥 NAJWAŻNIEJSZY FIX
+oil.columns = oil.columns.get_level_values(0)
+
+# reset index
 df_oil = oil.reset_index()
 
-# 🔥 bierzemy wartości (unikamy MultiIndex)
-df_oil["price_brent"] = oil["Close"].to_numpy()
+# teraz działa normalnie
+df_oil["price_brent"] = df_oil["Close"]
 
-# data
 df_oil["date"] = pd.to_datetime(df_oil["Date"])
 
-# finalny dataframe
 df_oil = df_oil[["date", "price_brent"]]
 
 
