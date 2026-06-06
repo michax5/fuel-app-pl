@@ -57,4 +57,4 @@ Aplikacja dostępna online:
 - analiza ceny ropy w PLN
 - wykresy zmian cen
 - analiza korelacji i opóźnienia
-- sygnał: czy warto kupić paliwo teraz, czy poczekać
+- sygnał: czy warto kupić paliwo teraz, czy poczekać  
